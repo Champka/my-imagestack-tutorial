@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import ProfileHeader from './profile-header';
-import ImageContainer from './image-container';
-import Spinner from './spinner';
-import { getImages } from '../action-creators';
+const React = require('react');
+const { connect } = require('react-redux');
+const ProfileHeader = require('./profile-header');
+const ImageContainer = require('./image-container');
+const Spinner = require('./spinner');
+const { getImages } = require('../action-creators');
 
 export class Home extends React.Component {
  

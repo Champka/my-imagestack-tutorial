@@ -1,29 +1,29 @@
-import 'babel-polyfill'; // for redux-saga
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {
+require('babel-polyfill'); // for redux-saga
+const React = require('react');
+const ReactDOM = require('react-dom');
+const {
   Router,
   Route,
   hashHistory
-} from 'react-router';
+} = require('react-router');
  
-import {
+const {
   createStore,
   applyMiddleware,
   compose
-} from 'redux';
+} = require('redux');
  
-import reducer from './reducer';
-import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga'
-import rootSaga from './sagas'
+const reducer = require('./reducer');
+const { Provider } = require('react-redux');
+const createSagaMiddleware = require('redux-saga');
+const rootSaga = require('./sagas');
 // our components
-import Layout from './components/layout';
-import { HomeContainer } from './components/home';
-import { DetailContainer } from './components/detail';
-import { AddContainer } from './components/add';
+const Layout = require('./components/layout');
+const { HomeContainer } = require('./components/home');
+const { DetailContainer } = require('./components/detail');
+const { AddContainer } = require('./components/add');
 // app css
-import '../dist/css/style.css';
+require('../dist/css/style.css');
  
 // Filestack API requires to set a key
 filepicker.setKey("A3q269uGaQWyFZJy31O5Yz");

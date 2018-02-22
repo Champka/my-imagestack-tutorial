@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from './image';
+const React = require('react');
+const Image = require('./image');
  
 export default class ImageContainer extends React.Component {
  

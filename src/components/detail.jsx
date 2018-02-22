@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { getImages } from '../action-creators';
-import Spinner from './spinner';
+const React = require('react');
+const { connect } = require('react-redux');
+const { getImages } = require('../action-creators');
+const Spinner = require('./spinner');
  
 export class Detail extends React.Component {
  

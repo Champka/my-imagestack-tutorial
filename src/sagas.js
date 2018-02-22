@@ -1,12 +1,12 @@
-import {
+const {
     takeLatest,
     delay
-} from 'redux-saga';
+} = require('redux-saga');
  
-import {
+const {
     put,
     select
-} from 'redux-saga/effects';
+} = require('redux-saga/effects');
  
 const FILESTACK_URL = 'https://process.filestackapi.com/';
  

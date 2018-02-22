@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import Spinner from './spinner';
-import {
+const React = require('react');
+const { connect } = require('react-redux');
+const Spinner = require('./spinner');
+const {
     uploadImage,
     postImage,
     setFilters
-} from '../action-creators';
+} = require('../action-creators');
  
 export class Add extends React.Component {
  

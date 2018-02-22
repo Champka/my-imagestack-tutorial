@@ -1,7 +1,7 @@
-import {
+const {
     Map,
     List 
-} from 'immutable';
+} = require('immutable');
  
 const INITIAL_STATE = Map({
     imageList: List([]),
