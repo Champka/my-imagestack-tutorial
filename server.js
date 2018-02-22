@@ -1,9 +1,14 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const Image = require('./src/models/images');
 
 const app = express();
 const port = process.env.PORT || 3001;
+
+const mongoUrl = 'mongodb://localhost:27017/my-imagestack';
 
 // Log with Morgan
 app.use(morgan('dev'));
@@ -15,47 +20,35 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Static files
 app.use(express.static(__dirname + '/dist'));
 
-// Load images from Filestack
-const imageList = [
-    {
-        key: 0,
-        url: "https://process.filestackapi.com/sharpen/negative/sb5RRdoQiiy5l5JUglB1"
-    },
-    {
-        key: 1,
-        url: "https://process.filestackapi.com/sharpen/oil_paint/urjTyRrAQA6sUzK2qIsd"
-    },
-    {
-        key: 2,
-        url: "https://process.filestackapi.com/sepia/modulate/wxYyL4yQyyRH1RQLZ6gL"
-    },
-    {
-        key: 3,
-        url: "https://process.filestackapi.com/blur/pixelate/O9vo0AynTNaNZlRyRBUm"
-    },
-    {
-        key: 4,
-        url: "https://process.filestackapi.com/blackwhite/kcirovLQC2eJmA6pkrMD"
-    },
-    {
-        key: 5,
-        url: "https://process.filestackapi.com/sharpen/modulate/5V2ZH22ZTWGXv2lMvvVT"
+mongoose.connect(mongoUrl, function(err, db) {
+    if(err) {
+        console.log('Connection failed due to:' + err);
+    } else {
+        console.log('Connected to Mongo at:' + mongoUrl);
     }
-];
+
+})
 
 app.route('/image')
-    .get((req,res) => res.json(imageList))
-    .post((req,res) => {
-        const { url } = req.body;
-        imageList.push({
-            key: imageList.length,
-            url: url
-        });
+    .get((req,res) => {
+        Image.find(function(err, images) {
+            if (err)
+                res.send(err);
 
-        res.json({
-            success: 1,
-            message: "Image successfully saved!"
-        });
+            res.json(images);
+        })
+    })
+    .post((req,res) => {
+        let image = new Image();
+
+        image.url = req.body.url;
+        
+        image.save(function(err, image) {
+            res.json({
+                success: 1,
+                message: "Image successfully saved!"
+            });
+        });        
     });
 
 app.listen(port);
